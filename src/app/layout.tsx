@@ -6,6 +6,7 @@ import "./globals.css";
 
 import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 import { Network } from "@aptos-labs/ts-sdk";
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 
 const geistSans = Geist({
@@ -28,6 +29,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { wallets } = useWallet();
   return (
     <html lang="en">
       <body
