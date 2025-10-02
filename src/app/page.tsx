@@ -10,7 +10,7 @@ import { Plus, TrendingUp, Users, Trophy, Clock, DollarSign, Search, ArrowLeft, 
 // Mock Backend Data
 const MOCK_POOLS = [
   {
-    id: 1,
+    id: 4,
     question: "Will MetaMask launch its own token in 2025?",
     category: "Crypto",
     image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=400&h=300&fit=crop",
@@ -21,18 +21,18 @@ const MOCK_POOLS = [
     creator: "0xabc...def1",
     resolver: "0x789...abc2",
     status: "active",
-    token: "USDC",
+    token: "APT",
     predictors: 1247
   },
   {
     id: 2,
-    question: "US government shutdown by October 2025?",
+    question: "US government shutdown by year end?",
     category: "Politics",
     image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=300&fit=crop",
     options: ["Yes", "No"],
     percentages: [79, 21],
     volume: 98234,
-    endTime: "2025-10-01T00:00:00",
+    endTime: "2026-01-01T00:00:00",
     creator: "0x123...456a",
     resolver: "0xdef...456b",
     status: "active",
@@ -40,22 +40,22 @@ const MOCK_POOLS = [
     predictors: 892
   },
   {
-    id: 6,
-    question: "Will NIKE beat quarterly earnings?",
-    category: "Earnings",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
-    options: ["Yes", "No"],
-    percentages: [82, 18],
+    id: 7,
+    question: "Which continent will win the Aptos global hackathon?",
+    category: "Hackathon",
+    image: "Image/APT.png",
+    options: ["Africa", "Asia", "Europe", "North America", "South America"],
+    percentages: [25, 35, 20, 15, 5],
     volume: 67892,
     endTime: "2025-11-15T16:00:00",
     creator: "0xdef...789b",
     resolver: "0x456...def3",
     status: "active",
-    token: "USDT",
+    token: "APT",
     predictors: 654
   },
   {
-    id: 4,
+    id: 5,
     question: "Bitcoin above $100,000 by end of 2025?",
     category: "Crypto",
     image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=300&fit=crop",
@@ -70,14 +70,14 @@ const MOCK_POOLS = [
     predictors: 2134
   },
   {
-    id: 5,
+    id: 6,
     question: "Man Utd vs Liverpool?",
     category: "Sports",
-    image: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=300&fit=crop",
+    image: "Image/1_United-LFC.webp",
     options: ["Man utd", "Liverpool", "Draw"],
-    percentages: [33.3,33.3,33.3],
+    percentages: [25, 70, 5],
     volume: 45678,
-    endTime: "2025-12-31T23:59:59",
+    endTime: "2025-10-19T16:30:00",
     creator: "0x456...def3",
     resolver: "0x123...456d",
     status: "active",
@@ -88,11 +88,11 @@ const MOCK_POOLS = [
     id: 3,
     question: "Champions League winners 2025?",
     category: "Sports",
-    image: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=400&h=300&fit=crop",
+    image: "Image/Champ.webp",
     options: ["Barca", "Real madrid", "Bayern", "Inter", "Liverpool", "Man city", "PSG", "Aresnal","Napoli","Another team"],
     percentages: [18, 23, 13, 5, 9, 7, 12, 7, 5, 1],
     volume: 1000,
-    endTime: "2025-10-31T23:59:59",
+    endTime: "2026-05-20T20:00:00",
     creator: "0xspo...rts1",
     resolver: "0xspo...rts2",
     status: "active",
@@ -114,15 +114,15 @@ const moduleName = "Gimodelo"; // Replace with your actual module name
 // Token addresses full type paths for staking
 const TOKEN_TYPE_ARGS = {
   APT: "0x1::aptos_coin::AptosCoin",
-  USDC: "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832::USDC::T",
-  USDT: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b::coin::T",
+  // USDC: "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832",
+  // USDT: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b::coin::T",
 };
 
 // Token addresses - just the address part for pool creation
 const TOKEN_ADDRESSES = {
   APT: "0x1",
-  USDC: "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832",
-  USDT: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b",
+  // USDC: "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832",
+  // USDT: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b",
 };
 
 const PoolCard = ({ pool, onClick }: { pool: any; onClick: () => void }) => {
@@ -180,7 +180,7 @@ const MarketExplorer = ({ onPoolSelect }: { onPoolSelect: (pool: any) => void })
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Trending', 'Crypto', 'Politics', 'Tech', 'Sports', 'Earnings'];
+  const categories = ['All', 'Trending', 'Crypto', 'Politics', 'Sports',];
 
   const filteredPools = MOCK_POOLS.filter(pool => {
     const matchesSearch = pool.question.toLowerCase().includes(searchQuery.toLowerCase());
@@ -481,11 +481,17 @@ const PoolDetailView = ({ pool, onBack }: { pool: any; onBack: () => void }) => 
               </div>
 
               <button
+                disabled={!connected || isLoading}
                 onClick={handleStake}
-                className="w-full py-4 bg-gradient-to-r from-red-900 to-red-800 hover:from-red-800 hover:to-red-700 text-white rounded-lg font-bold transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50"
+                className="w-full py-4 bg-gradient-to-r from-red-900 to-red-800 hover:from-red-800 hover:to-red-700 text-white rounded-lg font-bold transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Place Prediction
               </button>
+              {!connected && (
+                <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                  Please connect your wallet to stake
+                </div>
+              )}
 
               <div className="w-full">
                 {result && (
@@ -511,14 +517,37 @@ const AdminPanel = () => {
   const [removeTokenAddress, setRemoveTokenAddress] = useState('');
   const [resolverThreshold, setResolverThreshold] = useState('');
   const [creatorAddress, setCreatorAddress] = useState('');
+  const [revokeAddress, setRevokeAddress] = useState('');
+  const [withdrawPoolId, setWithdrawPoolId] = useState('');
   const [addResult, setAddResult] = useState('');
   const [removeResult, setRemoveResult] = useState('');
   const [thresholdResult, setThresholdResult] = useState('');
   const [grantResult, setGrantResult] = useState('');
+  const [revokeResult, setRevokeResult] = useState('');
+  const [withdrawResult, setWithdrawResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
   const [isThresholdLoading, setIsThresholdLoading] = useState(false);
   const [isGrantLoading, setIsGrantLoading] = useState(false);
+  const [isRevokeLoading, setIsRevokeLoading] = useState(false);
+  const [isWithdrawLoading, setIsWithdrawLoading] = useState(false);
+  const [detectedToken, setDetectedToken] = useState<string>('');
+
+  const handlePoolIdChange = (poolId: string) => {
+    setWithdrawPoolId(poolId);
+    setWithdrawResult('');
+    
+    if (poolId) {
+      const pool = MOCK_POOLS.find(p => p.id === parseInt(poolId));
+      if (pool) {
+        setDetectedToken(pool.token);
+      } else {
+        setDetectedToken('');
+      }
+    } else {
+      setDetectedToken('');
+    }
+  };
 
   const handleAddToken = async () => {
     if (!tokenAddress || !minFee) {
@@ -621,6 +650,57 @@ const AdminPanel = () => {
     }
   };
 
+  const handleRevokeCreator = async () => {
+    if (!revokeAddress) {
+      setRevokeResult('Please enter address to revoke');
+      return;
+    }
+
+    setIsRevokeLoading(true);
+    try {
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::revoke_role`,
+          functionArguments: ['CREATOR',revokeAddress],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      setRevokeResult(`Creator role revoked from ${revokeAddress} successfully!`);
+      setRevokeAddress('');
+    } catch (error: any) {
+      setRevokeResult(`Error: ${error.message}`);
+    } finally {
+      setIsRevokeLoading(false);
+    }
+  };
+
+  const handleAdminWithdraw = async () => {
+    if (!withdrawPoolId) {
+      setWithdrawResult('Please enter pool ID');
+      return;
+    }
+    const tokenType = TOKEN_TYPE_ARGS[detectedToken as keyof typeof TOKEN_TYPE_ARGS];
+    setIsWithdrawLoading(true);
+    try {
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::admin_withdraw`,
+          typeArguments: [tokenType],
+          functionArguments: [withdrawPoolId],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      setWithdrawResult(`Admin fees withdrawn from Pool #${withdrawPoolId} successfully!`);
+      setWithdrawPoolId('');
+    } catch (error: any) {
+      setWithdrawResult(`Error: ${error.message}`);
+    } finally {
+      setIsWithdrawLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center gap-3 mb-8">
@@ -657,11 +737,16 @@ const AdminPanel = () => {
             </div>
             <button
               onClick={handleAddToken}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-3 bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-900/30"
             >
               {isLoading ? 'Adding...' : 'Add Token'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to add tokens
+              </div>
+            )}
             {addResult && (
               <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
                 addResult.includes('successfully') 
@@ -690,11 +775,16 @@ const AdminPanel = () => {
             </div>
             <button
               onClick={handleRemoveToken}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-3 bg-red-900 hover:bg-red-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-red-900/30 mt-[52px]"
             >
               {isRemoving ? 'Removing...' : 'Remove Token'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to remove tokens
+              </div>
+            )}
             {removeResult && (
               <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
                 removeResult.includes('successfully') 
@@ -723,11 +813,16 @@ const AdminPanel = () => {
             </div>
             <button
               onClick={handleSetThreshold}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-3 bg-gradient-to-r from-red-900 to-red-800 hover:from-red-800 hover:to-red-700 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-red-900/30 mt-[52px]"
             >
               {isThresholdLoading ? 'Updating...' : 'Update Threshold'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to update threshold
+              </div>
+            )}
             {thresholdResult && (
               <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
                 thresholdResult.includes('successfully') 
@@ -756,11 +851,16 @@ const AdminPanel = () => {
             </div>
             <button
               onClick={handleGrantCreator}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-3 bg-purple-900 hover:bg-purple-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-900/30 mt-[52px]"
             >
               {isGrantLoading ? 'Granting...' : 'Grant Creator Role'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to grant role
+              </div>
+            )}
             {grantResult && (
               <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
                 grantResult.includes('successfully') 
@@ -768,6 +868,82 @@ const AdminPanel = () => {
                   : 'bg-red-950/50 text-red-400 border border-red-900/30'
               }`}>
                 {grantResult}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Revoke Creator Role */}
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-6 border border-zinc-800">
+          <h3 className="text-xl font-semibold mb-5 text-white">Revoke Creator Role</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-zinc-400 mb-2 font-medium">Creator Address</label>
+              <input
+                type="text"
+                placeholder="0x..."
+                value={revokeAddress}
+                onChange={(e) => setRevokeAddress(e.target.value)}
+                className="w-full bg-zinc-800 text-white px-4 py-3 rounded-lg border-2 border-zinc-700 focus:border-red-900 focus:outline-none placeholder-zinc-600"
+              />
+            </div>
+            <button
+              onClick={handleRevokeCreator}
+              disabled={isRevokeLoading || !connected}
+              className="w-full py-3 bg-red-900 hover:bg-red-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-red-900/30 mt-[52px]"
+            >
+              {isRevokeLoading ? 'Revoking...' : 'Revoke Creator Role'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to revoke role
+              </div>
+            )}
+            {revokeResult && (
+              <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
+                revokeResult.includes('successfully') 
+                  ? 'bg-emerald-950/50 text-emerald-400 border border-emerald-900/30' 
+                  : 'bg-red-950/50 text-red-400 border border-red-900/30'
+              }`}>
+                {revokeResult}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Admin Withdraw Fees */}
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-6 border border-zinc-800">
+          <h3 className="text-xl font-semibold mb-5 text-white">Withdraw Admin Fees</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-zinc-400 mb-2 font-medium">Pool ID</label>
+              <input
+                type="number"
+                placeholder="Enter Pool ID"
+                value={withdrawPoolId}
+                onChange={(e) => handlePoolIdChange(e.target.value)}
+                className="w-full bg-zinc-800 text-white px-4 py-3 rounded-lg border-2 border-zinc-700 focus:border-red-900 focus:outline-none placeholder-zinc-600"
+              />
+            </div>
+            <button
+              onClick={handleAdminWithdraw}
+              disabled={isWithdrawLoading || !connected}
+              className="w-full py-3 bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-900/30 mt-[52px]"
+            >
+              {isWithdrawLoading ? 'Withdrawing...' : 'Withdraw Admin Fees'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to withdraw fees
+              </div>
+            )}
+            {withdrawResult && (
+              <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
+                withdrawResult.includes('successfully') 
+                  ? 'bg-emerald-950/50 text-emerald-400 border border-emerald-900/30' 
+                  : 'bg-red-950/50 text-red-400 border border-red-900/30'
+              }`}>
+                {withdrawResult}
               </div>
             )}
           </div>
@@ -800,6 +976,7 @@ const BecomeResolverTab = () => {
   const { account, connected, signAndSubmitTransaction } = useWallet();
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [activeSection, setActiveSection] = useState<'become' | 'renew' | 'revoke'>('become');
 
   const handleBecomeResolver = async () => {
     setIsLoading(true);
@@ -821,65 +998,243 @@ const BecomeResolverTab = () => {
     }
   };
 
+  const handleRenewTimelock = async () => {
+    setIsLoading(true);
+    try {
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::renew_resolver_timelock`,
+          functionArguments: [],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      setResult(`Resolver timelock renewed successfully! Extended for another 30 days.`);
+    } catch (error: any) {
+      setResult(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRevokeResolver = async () => {
+    setIsLoading(true);
+    try {
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::revoke_resolver`,
+          functionArguments: [],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      setResult(`Successfully revoked resolver role! Your stake has been returned. 🎉`);
+    } catch (error: any) {
+      setResult(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="bg-purple-900 p-3 rounded-lg">
-            <Award className="text-white" size={24} />
-          </div>
-          <h2 className="text-3xl font-bold text-white">Become a Resolver</h2>
+    <div className="max-w-4xl mx-auto">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="bg-purple-900 p-3 rounded-lg">
+          <Award className="text-white" size={24} />
         </div>
-
-        <div className="mb-6 p-5 bg-purple-950/30 rounded-lg border border-purple-900/30">
-          <div className="flex items-start space-x-3">
-            <Trophy className="text-purple-400 mt-0.5 flex-shrink-0" size={20} />
-            <div className="text-sm text-purple-200">
-              <p className="font-semibold mb-2">Resolver Role Benefits</p>
-              <ul className="space-y-1 text-purple-300">
-                <li>• Earn 13% of platform fees for verifying outcomes</li>
-                <li>• Help maintain prediction market integrity</li>
-                <li>• Your stake will be locked for security</li>
-                <li>• Participate in dispute resolution</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="bg-zinc-950 rounded-lg p-5 border border-zinc-800">
-            <h3 className="text-white font-semibold mb-3">Requirements</h3>
-            <div className="space-y-2 text-sm text-zinc-400">
-              <div className="flex justify-between">
-                <span>Minimum Stake Required</span>
-                <span className="text-white font-mono">100 APT</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Lock Period</span>
-                <span className="text-white">30 days (renewable)</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Fee Share</span>
-                <span className="text-emerald-400 font-semibold">13%</span>
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={handleBecomeResolver}
-            disabled={isLoading}
-            className="w-full py-4 bg-gradient-to-r from-purple-900 to-purple-800 hover:from-purple-800 hover:to-purple-700 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-900/30"
-          >
-            {isLoading ? 'Processing...' : 'Become Resolver'}
-          </button>
-
-          {result && (
-            <div className="p-4 rounded-lg text-sm font-semibold text-center bg-emerald-950/50 text-emerald-400 border border-emerald-900/30">
-              {result}
-            </div>
-          )}
-        </div>
+        <h2 className="text-3xl font-bold text-white">Resolver Management</h2>
       </div>
+
+      {/* Action Tabs */}
+      <div className="flex gap-2 mb-6 bg-zinc-900 p-1 rounded-lg w-fit">
+        <button
+          onClick={() => setActiveSection('become')}
+          className={`px-5 py-2.5 rounded-md transition-colors font-semibold ${
+            activeSection === 'become'
+              ? 'bg-purple-900 text-white'
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+          }`}
+        >
+          Become Resolver
+        </button>
+        <button
+          onClick={() => setActiveSection('renew')}
+          className={`px-5 py-2.5 rounded-md transition-colors font-semibold ${
+            activeSection === 'renew'
+              ? 'bg-purple-900 text-white'
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+          }`}
+        >
+          Renew Timelock
+        </button>
+        <button
+          onClick={() => setActiveSection('revoke')}
+          className={`px-5 py-2.5 rounded-md transition-colors font-semibold ${
+            activeSection === 'revoke'
+              ? 'bg-purple-900 text-white'
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+          }`}
+        >
+          Revoke Role
+        </button>
+      </div>
+
+      {/* Become Resolver */}
+      {activeSection === 'become' && (
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
+          <h3 className="text-2xl font-bold text-white mb-6">Become a Resolver</h3>
+
+          <div className="mb-6 p-5 bg-purple-950/30 rounded-lg border border-purple-900/30">
+            <div className="flex items-start space-x-3">
+              <Trophy className="text-purple-400 mt-0.5 flex-shrink-0" size={20} />
+              <div className="text-sm text-purple-200">
+                <p className="font-semibold mb-2">Resolver Role Benefits</p>
+                <ul className="space-y-1 text-purple-300">
+                  <li>• Earn 20% of platform fees for verifying outcomes</li>
+                  <li>• Help maintain prediction market integrity</li>
+                  <li>• Your stake will be locked for security</li>
+                  <li>• Participate in dispute resolution</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-zinc-950 rounded-lg p-5 border border-zinc-800">
+              <h3 className="text-white font-semibold mb-3">Requirements</h3>
+              <div className="space-y-2 text-sm text-zinc-400">
+                <div className="flex justify-between">
+                  <span>Minimum Stake Required</span>
+                  <span className="text-white font-mono">1000 APT</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Lock Period</span>
+                  <span className="text-white">30 days (renewable)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Fee Share</span>
+                  <span className="text-emerald-400 font-semibold">20%</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleBecomeResolver}
+              disabled={isLoading || !connected}
+              className="w-full py-4 bg-gradient-to-r from-purple-900 to-purple-800 hover:from-purple-800 hover:to-purple-700 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-900/30"
+            >
+              {isLoading ? 'Processing...' : 'Become Resolver'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to become a resolver
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Renew Timelock */}
+      {activeSection === 'renew' && (
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
+          <h3 className="text-2xl font-bold text-white mb-6">Renew Resolver Timelock</h3>
+
+          <div className="mb-6 p-5 bg-blue-950/30 rounded-lg border border-blue-900/30">
+            <p className="text-sm text-blue-200">
+              Renew your resolver timelock to continue verifying predictions. This extends your lock period by another 30 days and keeps you eligible to earn resolver fees.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-zinc-950 rounded-lg p-5 border border-zinc-800">
+              <h3 className="text-white font-semibold mb-3">Timelock Details</h3>
+              <div className="space-y-2 text-sm text-zinc-400">
+                <div className="flex justify-between">
+                  <span>Extension Period</span>
+                  <span className="text-white">30 days</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Current Status</span>
+                  <span className="text-emerald-400">Active</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Threshold Required</span>
+                  <span className="text-white">Must renew before expiry</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleRenewTimelock}
+              disabled={isLoading || !connected}
+              className="w-full py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-900/30"
+            >
+              {isLoading ? 'Renewing...' : 'Renew Timelock'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to renew timelock
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Revoke Role */}
+      {activeSection === 'revoke' && (
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
+          <h3 className="text-2xl font-bold text-white mb-6">Revoke Resolver Role</h3>
+
+          <div className="mb-6 p-5 bg-red-950/30 rounded-lg border border-red-900/30">
+            <p className="text-sm text-red-200">
+              <strong>Warning:</strong> Revoking your resolver role will return your staked tokens but you'll lose access to resolver privileges and fee earnings. You can only revoke after your timelock has expired.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-zinc-950 rounded-lg p-5 border border-zinc-800">
+              <h3 className="text-white font-semibold mb-3">Revocation Conditions</h3>
+              <div className="space-y-2 text-sm text-zinc-400">
+                <div className="flex justify-between">
+                  <span>Timelock Status</span>
+                  <span className="text-emerald-400">Expired</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Stake to Return</span>
+                  <span className="text-white font-mono">1000 APT</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Pending Fees</span>
+                  <span className="text-yellow-400">Withdraw before revoking</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleRevokeResolver}
+              disabled={isLoading || !connected}
+              className="w-full py-4 bg-red-900 hover:bg-red-800 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-red-900/30"
+            >
+              {isLoading ? 'Revoking...' : 'Revoke Resolver Role'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to revoke resolver role
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {result && (
+        <div className={`mt-6 p-4 rounded-lg text-sm font-semibold text-center ${
+          result.includes('successfully') 
+            ? 'bg-emerald-950/50 text-emerald-400 border border-emerald-900/30' 
+            : 'bg-red-950/50 text-red-400 border border-red-900/30'
+        }`}>
+          {result}
+        </div>
+      )}
     </div>
   );
 };
@@ -890,9 +1245,31 @@ const ResolverActionsTab = () => {
   const [winningOption, setWinningOption] = useState('');
   const [disputePoolId, setDisputePoolId] = useState('');
   const [resolvePoolId, setResolvePoolId] = useState('');
+  const [withdrawPoolId, setWithdrawPoolId] = useState('');
+  const [isDisputorFee, setIsDisputorFee] = useState(false);
   const [result, setResult] = useState('');
+  const [withdrawResult, setWithdrawResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [activeAction, setActiveAction] = useState<'propose' | 'dispute' | 'resolve'>('propose');
+  const [isWithdrawLoading, setIsWithdrawLoading] = useState(false);
+  const [detectedToken, setDetectedToken] = useState<string>('');
+  const [activeAction, setActiveAction] = useState<'propose' | 'dispute' | 'resolve' | 'withdraw'>('propose');
+
+  // Detect token type when pool ID changes
+  const handlePoolIdChange = (poolId: string) => {
+    setWithdrawPoolId(poolId);
+    setResult('');
+    
+    if (poolId) {
+      const pool = MOCK_POOLS.find(p => p.id === parseInt(poolId));
+      if (pool) {
+        setDetectedToken(pool.token);
+      } else {
+        setDetectedToken('');
+      }
+    } else {
+      setWithdrawPoolId('');
+    }
+  };
 
   const handleProposeResolution = async () => {
     if (!selectedPoolId || !winningOption) {
@@ -979,6 +1356,36 @@ const ResolverActionsTab = () => {
     }
   };
 
+  const handleWithdrawFees = async () => {
+    if (!isDisputorFee && !withdrawPoolId) {
+      setWithdrawResult('Please enter pool ID or select disputor fee');
+      return;
+    }
+
+    setIsWithdrawLoading(true);
+    const tokenType = TOKEN_TYPE_ARGS[detectedToken as keyof typeof TOKEN_TYPE_ARGS];
+    try {
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::withdraw_resolver_fee`,
+          typeArguments: [tokenType],
+          functionArguments: [isDisputorFee, withdrawPoolId],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      const feeType = isDisputorFee ? 'disputor fees' : `fees from Pool #${withdrawPoolId}`;
+      setWithdrawResult(`Successfully withdrew ${feeType}!`);
+      setWithdrawPoolId('');
+    } catch (error: any) {
+      setWithdrawPoolId('');
+      setWithdrawResult(`Error: ${error.message}`);
+    } finally {
+      setIsWithdrawLoading(false);
+      setWithdrawPoolId('');
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center gap-3 mb-8">
@@ -1020,6 +1427,16 @@ const ResolverActionsTab = () => {
         >
           Resolve Pool
         </button>
+        <button
+          onClick={() => setActiveAction('withdraw')}
+          className={`px-5 py-2.5 rounded-md transition-colors font-semibold whitespace-nowrap ${
+            activeAction === 'withdraw'
+              ? 'bg-blue-900 text-white'
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+          }`}
+        >
+          Withdraw Fees
+        </button>
       </div>
 
       {/* Propose Resolution */}
@@ -1058,11 +1475,16 @@ const ResolverActionsTab = () => {
 
             <button
               onClick={handleProposeResolution}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-900/30"
             >
               {isLoading ? 'Proposing...' : 'Propose Resolution'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to propose resolution
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1103,11 +1525,16 @@ const ResolverActionsTab = () => {
 
             <button
               onClick={handleDisputeResolution}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-4 bg-orange-900 hover:bg-orange-800 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-900/30"
             >
               {isLoading ? 'Disputing...' : 'Submit Dispute'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to dispute resolution
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1153,11 +1580,104 @@ const ResolverActionsTab = () => {
 
             <button
               onClick={handleResolvePool}
-              disabled={isLoading}
+              disabled={isLoading || !connected}
               className="w-full py-4 bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-900/30"
             >
               {isLoading ? 'Resolving...' : 'Resolve Pool'}
             </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to resolve pool
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Withdraw Fees */}
+      {activeAction === 'withdraw' && (
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
+          <h3 className="text-2xl font-bold text-white mb-6">Withdraw Resolver Fees</h3>
+          
+          <div className="mb-6 p-5 bg-purple-950/30 rounded-lg border border-purple-900/30">
+            <p className="text-sm text-purple-200">
+              Withdraw your earned fees from resolving pools. You can withdraw pool-specific fees or global disputor fees.
+            </p>
+          </div>
+
+          <div className="space-y-5">
+            {/* Fee Type Toggle */}
+            <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800">
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={isDisputorFee}
+                  onChange={(e) => { setIsDisputorFee(e.target.checked); handlePoolIdChange('3') }}
+                  className="w-5 h-5 rounded bg-zinc-800 border-2 border-zinc-700 checked:bg-purple-900 checked:border-purple-900"
+                />
+                <span className="text-white font-medium">Withdraw Global Disputor Fees (APT)</span>
+              </label>
+              <p className="text-xs text-zinc-500 mt-2 ml-8">
+                Check this to withdraw accumulated disputor fees instead of pool-specific fees
+              </p>
+            </div>
+
+            {/* Pool ID input - only show if not disputor fee */}
+            {!isDisputorFee && (
+              <div>
+                <label className="block text-sm text-zinc-400 mb-2 font-medium">Pool ID</label>
+                <input
+                  type="number"
+                  placeholder="Enter Pool ID"
+                  value={withdrawPoolId}
+                  onChange={(e) => handlePoolIdChange(e.target.value)}
+                  className="w-full bg-zinc-800 text-white px-4 py-3 rounded-lg border-2 border-zinc-700 focus:border-purple-900 focus:outline-none"
+                />
+              </div>
+            )}
+
+            <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800 space-y-3">
+              <h4 className="text-white font-semibold text-sm">Fee Information</h4>
+              <div className="flex justify-between text-sm">
+                <span className="text-zinc-500">Fee Type</span>
+                <span className="text-white font-mono">
+                  {isDisputorFee ? 'Global Disputor Fees' : 'Pool-Specific Resolver Fees'}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-zinc-500">Token</span>
+                <span className="text-white">
+                  {isDisputorFee ? 'APT' : 'Pool Token'}
+                </span>
+              </div>
+              {/* <div className="flex justify-between text-sm">
+                <span className="text-zinc-500">Estimated Available</span>
+                <span className="text-emerald-400 font-semibold">Check contract</span>
+              </div> */}
+            </div>
+
+            <button
+              onClick={handleWithdrawFees}
+              disabled={isWithdrawLoading || !connected}
+              className="w-full py-4 bg-gradient-to-r from-purple-900 to-purple-800 hover:from-purple-800 hover:to-purple-700 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-900/30"
+            >
+              {isWithdrawLoading ? 'Withdrawing...' : 'Withdraw Fees'}
+            </button>
+            {!connected && (
+              <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+                Please connect your wallet to withdraw fees
+              </div>
+            )}
+
+            {withdrawResult && (
+              <div className={`p-4 rounded-lg text-sm font-semibold text-center ${
+                withdrawResult.includes('successfully') 
+                  ? 'bg-emerald-950/50 text-emerald-400 border border-emerald-900/30' 
+                  : 'bg-red-950/50 text-red-400 border border-red-900/30'
+              }`}>
+                {withdrawResult}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1171,6 +1691,192 @@ const ResolverActionsTab = () => {
           {result}
         </div>
       )}
+    </div>
+  );
+};
+
+const UserWithdrawTab = () => {
+  const { account, connected, signAndSubmitTransaction } = useWallet();
+  const [withdrawPoolId, setWithdrawPoolId] = useState('');
+  const [detectedToken, setDetectedToken] = useState<string>('');
+  const [result, setResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Detect token type when pool ID changes
+  const handlePoolIdChange = (poolId: string) => {
+    setWithdrawPoolId(poolId);
+    setResult('');
+    
+    if (poolId) {
+      const pool = MOCK_POOLS.find(p => p.id === parseInt(poolId));
+      if (pool) {
+        setDetectedToken(pool.token);
+      } else {
+        setDetectedToken('');
+      }
+    } else {
+      setDetectedToken('');
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (!withdrawPoolId) {
+      setResult('Please enter a pool ID');
+      return;
+    }
+
+    if (!detectedToken) {
+      setResult('Pool not found. Please check the pool ID.');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const tokenType = TOKEN_TYPE_ARGS[detectedToken as keyof typeof TOKEN_TYPE_ARGS];
+
+      const payload: InputTransactionData = {
+        data: {
+          function: `${moduleAddress}::${moduleName}::user_withdraw`,
+          typeArguments: [tokenType],
+          functionArguments: [parseInt(withdrawPoolId)],
+        },
+      };
+
+      const response = await signAndSubmitTransaction(payload);
+      setResult(`Withdrawal successful! Your winnings have been transferred.`);
+      setWithdrawPoolId('');
+      setDetectedToken('');
+    } catch (error: any) {
+      setResult(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="bg-emerald-900 p-3 rounded-lg">
+          <DollarSign className="text-white" size={24} />
+        </div>
+        <h2 className="text-3xl font-bold text-white">Withdraw Winnings</h2>
+      </div>
+
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-xl p-8 border border-zinc-800">
+        <div className="mb-6 p-5 bg-emerald-950/30 rounded-lg border border-emerald-900/30">
+          <div className="flex items-start space-x-3">
+            <Trophy className="text-emerald-400 mt-0.5 flex-shrink-0" size={20} />
+            <div className="text-sm text-emerald-200">
+              <p className="font-semibold mb-2">Withdraw Your Winnings</p>
+              <p className="text-emerald-300">
+                Enter the pool ID of a resolved market where you placed a winning prediction. 
+                You can only withdraw once per pool, and only if you're eligible (placed a winning bet).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm text-zinc-400 mb-2 font-medium">Pool ID</label>
+            <input
+              type="number"
+              placeholder="Enter Pool ID"
+              value={withdrawPoolId}
+              onChange={(e) => handlePoolIdChange(e.target.value)}
+              className="w-full bg-zinc-800 text-white px-4 py-3 rounded-lg border-2 border-zinc-700 focus:border-emerald-900 focus:outline-none"
+            />
+            {withdrawPoolId && detectedToken && (
+              <p className="text-xs text-emerald-400 mt-2 flex items-center gap-1">
+                ✓ Pool found - Token type: {detectedToken}
+              </p>
+            )}
+            {withdrawPoolId && !detectedToken && (
+              <p className="text-xs text-red-400 mt-2">
+                Pool not found. Please check the pool ID.
+              </p>
+            )}
+          </div>
+
+          <div className="bg-zinc-950 rounded-lg p-5 border border-zinc-800">
+            <h3 className="text-white font-semibold mb-3 text-sm">Withdrawal Information</h3>
+            <div className="space-y-2 text-sm text-zinc-400">
+              <div className="flex justify-between">
+                <span>Pool Must Be</span>
+                <span className="text-white">Resolved</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Your Prediction</span>
+                <span className="text-emerald-400 font-semibold">Must Be Winning Option</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Withdrawals Per Pool</span>
+                <span className="text-white">Once Only</span>
+              </div>
+              {detectedToken && (
+                <div className="flex justify-between pt-2 border-t border-zinc-800">
+                  <span>Withdrawal Token</span>
+                  <span className="text-emerald-400 font-semibold">{detectedToken}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <button
+            onClick={handleWithdraw}
+            disabled={isLoading || !connected}
+            className="w-full py-4 bg-gradient-to-r from-emerald-900 to-emerald-800 hover:from-emerald-800 hover:to-emerald-700 text-white rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/50"
+          >
+            {isLoading ? 'Processing Withdrawal...' : 'Withdraw Winnings'}
+          </button>
+
+          {!connected && (
+            <div className="p-4 rounded-lg text-xs font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+              Please connect your wallet to withdraw
+            </div>
+          )}
+
+          {result && (
+            <div className={`p-4 rounded-lg text-sm font-semibold text-center ${
+              result.includes('successful') 
+                ? 'bg-emerald-950/50 text-emerald-400 border border-emerald-900/30' 
+                : 'bg-red-950/50 text-red-400 border border-red-900/30'
+            }`}>
+              {result}
+            </div>
+          )}
+        </div>
+
+        {/* Sample Eligible Pools (Mock Data) */}
+        <div className="mt-8 pt-8 border-t border-zinc-800">
+          <h3 className="text-white font-semibold mb-4">Your Eligible Withdrawals</h3>
+          <div className="space-y-3">
+            <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800 hover:border-emerald-900/50 transition-colors">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-white font-medium text-sm">Pool #1 - MetaMask Token Launch</p>
+                  <p className="text-zinc-500 text-xs mt-1">Predicted: Yes • Status: Resolved</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-emerald-400 font-bold">+125 APT</p>
+                  <p className="text-zinc-600 text-xs">Available</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800 opacity-50">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-white font-medium text-sm">Pool #4 - Bitcoin $100k</p>
+                  <p className="text-zinc-500 text-xs mt-1">Predicted: Yes • Status: Resolved</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-zinc-500 font-bold">Already Withdrawn</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -1400,11 +2106,16 @@ const CreatePoolTab = ({ onPoolCreated }: { onPoolCreated: (pool: any) => void }
 
           <button
             onClick={handleCreate}
-            disabled={isLoading}
-            className="w-full py-4 bg-gradient-to-r from-red-900 to-red-800 hover:from-red-800 hover:to-red-700 text-white rounded-lg font-bold transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50"
+            disabled={isLoading || !connected}
+            className="w-full py-4 bg-gradient-to-r from-red-900 to-red-800 hover:from-red-800 hover:to-red-700 text-white rounded-lg font-bold transition-all shadow-lg shadow-red-900/30 hover:shadow-red-900/50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Creating Pool...' : 'Create Prediction Pool'}
           </button>
+          {!connected && (
+            <div className="p-4 rounded-lg text-sm font-semibold text-center bg-yellow-950/50 text-yellow-400 border border-yellow-900/30">
+              Please connect your wallet to create a pool
+            </div>
+          )}
 
           {result && (
             <div className={`p-4 rounded-lg text-sm font-semibold text-center ${
@@ -1464,6 +2175,291 @@ const ResolversTab = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+const PitchDeckSection = () => {
+  return (
+    <div className="max-w-6xl mx-auto space-y-16">
+      {/* Hero Section */}
+      <div className="text-center space-y-6 py-12">
+        <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+          The Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Prediction Markets</span>
+        </h1>
+        <p className="text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed">
+          Gimodelo democratizes forecasting by enabling communities, DAOs, and individuals to create trustless prediction markets on Aptos blockchain
+        </p>
+      </div>
+
+      {/* Problem Statement */}
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-10 border border-zinc-800">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="bg-red-900 p-3 rounded-lg">
+            <TrendingUp className="text-white" size={28} />
+          </div>
+          <h2 className="text-3xl font-bold text-white">The Problem</h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 text-zinc-300">
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-white">Traditional Prediction Markets</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>Centralized control over market creation and resolution</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>Limited transparency in outcome verification</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>High barriers to entry for market creators</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>Gaming through front-running and information asymmetry</span>
+              </li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-white">Limited Use Cases</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>DAOs lack decision-making forecasting tools</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>Communities cannot create custom prediction markets</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>No incentive structures for accurate forecasting</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1">•</span>
+                <span>Existing platforms focus only on mainstream events</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Solution */}
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-10 border border-zinc-800">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="bg-emerald-900 p-3 rounded-lg">
+            <Trophy className="text-white" size={28} />
+          </div>
+          <h2 className="text-3xl font-bold text-white">Our Solution</h2>
+        </div>
+        <p className="text-lg text-zinc-300 mb-8 leading-relaxed">
+          Gimodelo is a fully decentralized prediction market protocol built on Aptos that empowers anyone to create, participate in, and resolve prediction markets with complete transparency and fairness.
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-zinc-950 rounded-xl p-6 border border-zinc-800">
+            <div className="bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+              <Users size={24} className="text-blue-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-2">Community Governed</h3>
+            <p className="text-sm text-zinc-400">Anyone can create prediction markets. Communities control their own forecasting ecosystems.</p>
+          </div>
+          <div className="bg-zinc-950 rounded-xl p-6 border border-zinc-800">
+            <div className="bg-purple-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+              <Award size={24} className="text-purple-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-2">Decentralized Resolution</h3>
+            <p className="text-sm text-zinc-400">Multi-resolver consensus with dispute mechanisms ensures accurate outcomes without central authority.</p>
+          </div>
+          <div className="bg-zinc-950 rounded-xl p-6 border border-zinc-800">
+            <div className="bg-red-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+              <Flame size={24} className="text-red-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-2">Blind Prediction</h3>
+            <p className="text-sm text-zinc-400">Hidden odds prevent gaming. Success depends purely on forecasting accuracy, not crowd following.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works */}
+      <div className="space-y-8">
+        <h2 className="text-4xl font-bold text-white text-center">How Gimodelo Works</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-br from-purple-950/30 to-zinc-950 rounded-xl p-8 border border-purple-900/30">
+            <div className="text-5xl font-bold text-purple-400 mb-4">01</div>
+            <h3 className="text-xl font-bold text-white mb-3">Creators</h3>
+            <ul className="space-y-2 text-sm text-zinc-400">
+              <li>• Design prediction pools on any topic</li>
+              <li>• Set parameters and accepted tokens</li>
+              <li>• Earn 10% of platform fees</li>
+              <li>• Build markets for their communities</li>
+            </ul>
+          </div>
+          <div className="bg-gradient-to-br from-blue-950/30 to-zinc-950 rounded-xl p-8 border border-blue-900/30">
+            <div className="text-5xl font-bold text-blue-400 mb-4">02</div>
+            <h3 className="text-xl font-bold text-white mb-3">Predictors</h3>
+            <ul className="space-y-2 text-sm text-zinc-400">
+              <li>• Stake tokens on predicted outcomes</li>
+              <li>• Winners share entire pool proportionally</li>
+              <li>• Blind betting prevents gaming</li>
+              <li>• Pure skill-based forecasting</li>
+            </ul>
+          </div>
+          <div className="bg-gradient-to-br from-emerald-950/30 to-zinc-950 rounded-xl p-8 border border-emerald-900/30">
+            <div className="text-5xl font-bold text-emerald-400 mb-4">03</div>
+            <h3 className="text-xl font-bold text-white mb-3">Resolvers</h3>
+            <ul className="space-y-2 text-sm text-zinc-400">
+              <li>• Verify outcomes with consensus mechanism</li>
+              <li>• Earn 40% of platform fees</li>
+              <li>• Dispute system ensures accuracy</li>
+              <li>• Staked tokens guarantee honesty</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Use Cases */}
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-10 border border-zinc-800">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">Unlimited Use Cases</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="space-y-3">
+            <div className="bg-red-900/20 w-14 h-14 rounded-xl flex items-center justify-center">
+              <span className="text-3xl">🏛️</span>
+            </div>
+            <h4 className="text-white font-semibold">DAOs</h4>
+            <p className="text-sm text-zinc-400">Forecast governance proposals, treasury decisions, and protocol upgrades</p>
+          </div>
+          <div className="space-y-3">
+            <div className="bg-blue-900/20 w-14 h-14 rounded-xl flex items-center justify-center">
+              <span className="text-3xl">🏀</span>
+            </div>
+            <h4 className="text-white font-semibold">Sports</h4>
+            <p className="text-sm text-zinc-400">Community-driven markets for games, tournaments, and player performance</p>
+          </div>
+          <div className="space-y-3">
+            <div className="bg-emerald-900/20 w-14 h-14 rounded-xl flex items-center justify-center">
+              <span className="text-3xl">📈</span>
+            </div>
+            <h4 className="text-white font-semibold">Finance</h4>
+            <p className="text-sm text-zinc-400">Token prices, earnings reports, economic indicators, and market trends</p>
+          </div>
+          <div className="space-y-3">
+            <div className="bg-purple-900/20 w-14 h-14 rounded-xl flex items-center justify-center">
+              <span className="text-3xl">🌍</span>
+            </div>
+            <h4 className="text-white font-semibold">Communities</h4>
+            <p className="text-sm text-zinc-400">Local events, trends, decisions affecting your community</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Aptos */}
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-10 border border-zinc-800">
+        <h2 className="text-3xl font-bold text-white mb-6">Built on Aptos</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <p className="text-zinc-300 mb-6 leading-relaxed">
+              Aptos provides the perfect foundation for Gimodelo with its high throughput, low latency, and robust Move programming language ensuring secure smart contract execution.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="bg-emerald-900/30 p-2 rounded-lg mt-1">
+                  <ChevronRight size={16} className="text-emerald-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Lightning Fast</h4>
+                  <p className="text-sm text-zinc-400">Sub-second finality enables real-time prediction markets</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="bg-blue-900/30 p-2 rounded-lg mt-1">
+                  <ChevronRight size={16} className="text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Cost Efficient</h4>
+                  <p className="text-sm text-zinc-400">Low transaction fees make micro-predictions viable</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="bg-purple-900/30 p-2 rounded-lg mt-1">
+                  <ChevronRight size={16} className="text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Secure by Design</h4>
+                  <p className="text-sm text-zinc-400">Move language prevents common smart contract vulnerabilities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-zinc-950 rounded-xl p-6 border border-zinc-800">
+            <h3 className="text-white font-semibold mb-4">Key Advantages</h3>
+            <div className="space-y-3 text-sm text-zinc-400">
+              <div className="flex justify-between p-3 bg-zinc-900 rounded-lg">
+                <span>Transaction Speed</span>
+                <span className="text-emerald-400 font-semibold">&lt;1 second</span>
+              </div>
+              <div className="flex justify-between p-3 bg-zinc-900 rounded-lg">
+                <span>Theoretical TPS</span>
+                <span className="text-blue-400 font-semibold">160,000+</span>
+              </div>
+              <div className="flex justify-between p-3 bg-zinc-900 rounded-lg">
+                <span>Smart Contract Language</span>
+                <span className="text-purple-400 font-semibold">Move</span>
+              </div>
+              <div className="flex justify-between p-3 bg-zinc-900 rounded-lg">
+                <span>Parallel Execution</span>
+                <span className="text-red-400 font-semibold">Yes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Economics */}
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-2xl p-10 border border-zinc-800">
+        <h2 className="text-3xl font-bold text-white mb-6">Sustainable Economics</h2>
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-red-950/20 rounded-xl p-6 border border-red-900/30 text-center">
+            <div className="text-4xl font-bold text-red-400 mb-2">50%</div>
+            <div className="text-white font-semibold mb-1">Platform</div>
+            <div className="text-sm text-zinc-400">Development & maintenance</div>
+          </div>
+          <div className="bg-blue-950/20 rounded-xl p-6 border border-blue-900/30 text-center">
+            <div className="text-4xl font-bold text-blue-400 mb-2">40%</div>
+            <div className="text-white font-semibold mb-1">Resolvers</div>
+            <div className="text-sm text-zinc-400">Outcome verification</div>
+          </div>
+          <div className="bg-purple-950/20 rounded-xl p-6 border border-purple-900/30 text-center">
+            <div className="text-4xl font-bold text-purple-400 mb-2">10%</div>
+            <div className="text-white font-semibold mb-1">Creators</div>
+            <div className="text-sm text-zinc-400">Market creation rewards</div>
+          </div>
+        </div>
+        <div className="bg-zinc-950 rounded-xl p-6 border border-zinc-800">
+          <h3 className="text-white font-semibold mb-3">Fair & Transparent</h3>
+          <p className="text-sm text-zinc-400 leading-relaxed">
+            Only 1% platform fee on total pool stakes ensures competitive odds while incentivizing all participants. Winners share 99% of the pool, creating the most favorable conditions for accurate forecasters.
+          </p>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl p-12 text-center border border-red-700">
+        <h2 className="text-4xl font-bold text-white mb-4">Join the Future of Forecasting</h2>
+        <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+          Whether you're a DAO looking to gauge community sentiment, a creator wanting to monetize your insights, or a forecaster seeking fair markets, Gimodelo is built for you.
+        </p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <button className="px-8 py-4 bg-white text-red-900 rounded-lg font-bold hover:bg-zinc-100 transition-all shadow-lg">
+            Start Predicting
+          </button>
+          <button className="px-8 py-4 bg-zinc-900 text-white rounded-lg font-bold hover:bg-zinc-800 transition-all border border-zinc-700 opacity-70 cursor-not-allowed">
+            Read Documentation
+          </button>
         </div>
       </div>
     </div>
@@ -1533,7 +2529,7 @@ const App = () => {
         <nav className="border-b border-zinc-900 bg-zinc-950/30">
           <div className="container mx-auto px-6">
             <div className="flex gap-1">
-              {['explore', 'admin', 'create event', 'become a resolver', 'resolver', 'leaderboard'].map((tab) => (
+              {['explore', 'admin', 'create event', 'become a resolver', 'resolver', 'user withdraw', 'leaderboard', 'pitch deck'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
@@ -1566,6 +2562,8 @@ const App = () => {
             {activeTab === 'resolver' && <ResolverActionsTab />}
             {activeTab === 'become a resolver' && <BecomeResolverTab />}
             {activeTab === 'leaderboard' && <ResolversTab />}
+            {activeTab === 'user withdraw' && <UserWithdrawTab />}
+            {activeTab === 'pitch deck' && <PitchDeckSection />}
           </>
         )}
       </main>
