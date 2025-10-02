@@ -6,10 +6,7 @@ import "./globals.css";
 
 import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 import { Network } from "@aptos-labs/ts-sdk";
-import { PetraWallet } from "petra-plugin-wallet-adapter";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
-
-const wallets = [new PetraWallet()];
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
