@@ -16,13 +16,13 @@ const MOCK_POOLS = [
     image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=400&h=300&fit=crop",
     options: ["Yes", "No"],
     percentages: [68, 32],
-    volume: 125430,
+    volume: 12,
     endTime: "2025-12-31T23:59:59",
     creator: "0xabc...def1",
     resolver: "0x789...abc2",
     status: "active",
     token: "APT",
-    predictors: 1247
+    predictors: 2
   },
   {
     id: 2,
@@ -31,13 +31,13 @@ const MOCK_POOLS = [
     image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=300&fit=crop",
     options: ["Yes", "No"],
     percentages: [79, 21],
-    volume: 98234,
+    volume: 0,
     endTime: "2026-01-01T00:00:00",
     creator: "0x123...456a",
     resolver: "0xdef...456b",
     status: "active",
     token: "APT",
-    predictors: 892
+    predictors: 0
   },
   {
     id: 7,
@@ -46,13 +46,13 @@ const MOCK_POOLS = [
     image: "Image/APT.png",
     options: ["Africa", "Asia", "Europe", "North America", "South America"],
     percentages: [25, 35, 20, 15, 5],
-    volume: 67892,
+    volume: 100,
     endTime: "2025-11-15T16:00:00",
     creator: "0xdef...789b",
     resolver: "0x456...def3",
     status: "active",
     token: "APT",
-    predictors: 654
+    predictors: 7
   },
   {
     id: 5,
@@ -61,13 +61,13 @@ const MOCK_POOLS = [
     image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=300&fit=crop",
     options: ["Yes", "No"],
     percentages: [55, 45],
-    volume: 234567,
+    volume: 265,
     endTime: "2025-12-31T23:59:59",
     creator: "0x789...abc2",
     resolver: "0xabc...789c",
     status: "active",
     token: "APT",
-    predictors: 2134
+    predictors: 14
   },
   {
     id: 6,
@@ -76,13 +76,13 @@ const MOCK_POOLS = [
     image: "Image/1_United-LFC.webp",
     options: ["Man utd", "Liverpool", "Draw"],
     percentages: [25, 70, 5],
-    volume: 45678,
+    volume: 18,
     endTime: "2025-10-19T16:30:00",
     creator: "0x456...def3",
     resolver: "0x123...456d",
     status: "active",
     token: "APT",
-    predictors: 423
+    predictors: 4
   },
   {
     id: 3,
@@ -91,21 +91,21 @@ const MOCK_POOLS = [
     image: "Image/Champ.webp",
     options: ["Barca", "Real madrid", "Bayern", "Inter", "Liverpool", "Man city", "PSG", "Aresnal","Napoli","Another team"],
     percentages: [18, 23, 13, 5, 9, 7, 12, 7, 5, 1],
-    volume: 1000,
+    volume: 55,
     endTime: "2026-05-20T20:00:00",
     creator: "0xspo...rts1",
     resolver: "0xspo...rts2",
     status: "active",
     token: "APT",
-    predictors: 1567
+    predictors: 5
   }
 ];
 
 const TOP_CREATORS = [
-  { rank: 1, name: "Domestic_Bogeyman_ez", address: "0x897f60...427ef8", volume: 55225.404, predictors: 927 },
-  { rank: 2, name: "0xbabywhale", address: "0x5c00d7...8cd0b5", volume: 43181.079, predictors: 962 },
-  { rank: 3, name: "Geraldgzus", address: "0x57392a...bd1808", volume: 36489.023, predictors: 817 },
-  { rank: 4, name: "Rolex", address: "0x633ef9...5b7fbd", volume: 30315.701, predictors: 854 }
+  { rank: 1, name: "Domestic_Bogeyman_ez", address: "0x897f60...427ef8", volume: 265, predictors: 14 },
+  { rank: 2, name: "0xbabywhale", address: "0x5c00d7...8cd0b5", volume: 100, predictors: 7 },
+  { rank: 3, name: "Geraldgzus", address: "0x57392a...bd1808", volume: 55, predictors: 5 },
+  { rank: 4, name: "Rolex", address: "0x633ef9...5b7fbd", volume: 18, predictors: 4 }
 ];
 
 const moduleAddress = "0x8b1d975418c7b824dfcb6d3281daa7e88feff0d072c7befe0e8bdba8585cc1b7";
@@ -160,7 +160,7 @@ const PoolCard = ({ pool, onClick }: { pool: any; onClick: () => void }) => {
         <div className="flex items-center justify-between text-xs text-zinc-500">
           <div className="flex items-center space-x-1">
             <DollarSign size={13} />
-            <span>${(pool.volume / 1000).toFixed(1)}k</span>
+            <span>${(pool.volume).toFixed(1)}</span>
           </div>
           <div className="flex items-center space-x-1">
             <Users size={13} />
@@ -196,7 +196,7 @@ const MarketExplorer = ({ onPoolSelect }: { onPoolSelect: (pool: any) => void })
           <div className="flex items-center justify-between">
             <div>
               <p className="text-zinc-500 text-sm mb-1">Total Volume</p>
-              <p className="text-white text-3xl font-bold">$661k</p>
+              <p className="text-white text-3xl font-bold">$450</p>
             </div>
             <BarChart3 className="text-red-500" size={40} />
           </div>
@@ -214,7 +214,7 @@ const MarketExplorer = ({ onPoolSelect }: { onPoolSelect: (pool: any) => void })
           <div className="flex items-center justify-between">
             <div>
               <p className="text-zinc-500 text-sm mb-1">Total Predictors</p>
-              <p className="text-white text-3xl font-bold">7.9k</p>
+              <p className="text-white text-3xl font-bold">20</p>
             </div>
             <Users className="text-blue-500" size={40} />
           </div>
@@ -285,6 +285,7 @@ const PoolDetailView = ({ pool, onBack }: { pool: any; onBack: () => void }) => 
     setIsLoading(true);
     try {
       const tokenType = TOKEN_TYPE_ARGS[selectedToken as keyof typeof TOKEN_TYPE_ARGS];
+      const amountInSmallestUnit = Math.floor(parseFloat(stakeAmount) * 1000000);
 
       const payload: InputTransactionData = {
         data: {
@@ -292,7 +293,7 @@ const PoolDetailView = ({ pool, onBack }: { pool: any; onBack: () => void }) => 
           typeArguments: [tokenType],
           functionArguments: [
             parseInt(poolId),
-            parseInt(stakeAmount),
+            parseInt(amountInSmallestUnit.toString()),
             optionIndex,
           ],
         },
@@ -401,7 +402,7 @@ const PoolDetailView = ({ pool, onBack }: { pool: any; onBack: () => void }) => 
                 </div>
                 <div className="text-white text-xl font-semibold mb-2">{option}</div>
                 <div className="text-zinc-500 text-sm">
-                  ${((pool.volume * pool.percentages[idx]) / 100 / 1000).toFixed(1)}k staked
+                  ${((pool.volume * pool.percentages[idx]) / 100).toFixed(1)} staked
                 </div>
               </div>
             ))}
