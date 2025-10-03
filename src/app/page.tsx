@@ -2472,10 +2472,10 @@ const HowItWorksPage = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
-            How preDix Works
+            How Gimodelo Works
           </h1>
           <p className="text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            preDix operates through a structured ecosystem with defined roles and transparent economics, creating a sustainable prediction market platform.
+            Gimodelo operates through a structured ecosystem with defined roles and transparent economics, creating a sustainable prediction market platform.
           </p>
         </div>
 
