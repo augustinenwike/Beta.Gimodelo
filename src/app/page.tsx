@@ -5,7 +5,7 @@ import {
   useWallet,
 } from "@aptos-labs/wallet-adapter-react";
 import React, { useState } from 'react';
-import { Plus, TrendingUp, Users, Trophy, Clock, DollarSign, Search, ArrowLeft, Award, ChevronRight, Flame, BarChart3, Settings } from 'lucide-react';
+import { Plus, Trophy, Clock, Search, ArrowLeft, ChevronRight, Flame, BarChart3, Settings, Users, CheckCircle, TrendingUp, Coins, PieChart, Eye, EyeOff, Award, DollarSign, Target, Shield } from 'lucide-react';
 
 // Mock Backend Data
 const MOCK_POOLS = [
@@ -40,7 +40,7 @@ const MOCK_POOLS = [
     predictors: 0
   },
   {
-    id: 7,
+    id: 8,
     question: "Which continent will win the Aptos global hackathon?",
     category: "Hackathon",
     image: "Image/APT.png",
@@ -471,10 +471,6 @@ const PoolDetailView = ({ pool, onBack }: { pool: any; onBack: () => void }) => 
               </div>
 
               <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-zinc-500">Potential Return</span>
-                  <span className="text-emerald-400 font-bold">${potentialWinnings}</span>
-                </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-zinc-600">Platform Fee (1%)</span>
                   <span className="text-zinc-600">${((parseFloat(stakeAmount) || 0) * 0.01).toFixed(2)}</span>
@@ -2467,6 +2463,321 @@ const PitchDeckSection = () => {
   );
 };
 
+const HowItWorksPage = () => {
+  const [activeExample, setActiveExample] = useState('yes');
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white p-6 md:p-12">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-red-500 via-red-400 to-orange-500 bg-clip-text text-transparent">
+            How preDix Works
+          </h1>
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed">
+            preDix operates through a structured ecosystem with defined roles and transparent economics, creating a sustainable prediction market platform.
+          </p>
+        </div>
+
+        {/* Core Roles Section */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Users className="text-red-500" size={32} />
+            Core Roles
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Creators */}
+            <div className="bg-gradient-to-br from-purple-950/40 to-zinc-900 border border-purple-900/30 rounded-2xl p-8 hover:border-purple-700/50 transition-all">
+              <div className="bg-purple-900/30 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <Target className="text-purple-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-purple-300">Creators</h3>
+              <ul className="space-y-3 text-zinc-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-purple-500 mt-1">•</span>
+                  <span>Design and launch prediction pools</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-purple-500 mt-1">•</span>
+                  <span>Set pool parameters (question, accepted tokens, options)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-purple-500 mt-1">•</span>
+                  <span>Earn <span className="text-purple-400 font-bold">10%</span> of platform fees for successful pool creation</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Resolvers */}
+            <div className="bg-gradient-to-br from-emerald-950/40 to-zinc-900 border border-emerald-900/30 rounded-2xl p-8 hover:border-emerald-700/50 transition-all">
+              <div className="bg-emerald-900/30 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <CheckCircle className="text-emerald-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-emerald-300">Resolvers</h3>
+              <ul className="space-y-3 text-zinc-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-500 mt-1">•</span>
+                  <span>Verify and confirm prediction outcomes</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-500 mt-1">•</span>
+                  <span>Provide decentralized oracle services</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-500 mt-1">•</span>
+                  <span>Receive <span className="text-emerald-400 font-bold">40%</span> of platform fees for accurate resolution</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Users/Predictors */}
+            <div className="bg-gradient-to-br from-blue-950/40 to-zinc-900 border border-blue-900/30 rounded-2xl p-8 hover:border-blue-700/50 transition-all">
+              <div className="bg-blue-900/30 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <TrendingUp className="text-blue-400" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-blue-300">Users/Predictors</h3>
+              <ul className="space-y-3 text-zinc-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  <span>Stake tokens on their chosen outcomes</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  <span>Compete for proportional winnings based on accuracy</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  <span>Share the entire pool based on stake proportion</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Pool Creation Example */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Coins className="text-red-500" size={32} />
+            Pool Creation Example
+          </h2>
+          
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-8">
+            <div className="bg-zinc-950/50 rounded-xl p-6 mb-6 border border-red-900/30">
+              <p className="text-2xl font-semibold text-white mb-4">
+                "Will MetaMask launch its own token this year?"
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <span className="text-zinc-500">Accepted Token:</span>
+                  <span className="text-emerald-400 font-bold">USDC</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-emerald-950/20 border border-emerald-900/30 rounded-xl p-6">
+                <h4 className="text-xl font-bold text-emerald-400 mb-2">Option 1: YES</h4>
+                <p className="text-zinc-400 text-sm">Stake on positive outcome</p>
+              </div>
+              <div className="bg-red-950/20 border border-red-900/30 rounded-xl p-6">
+                <h4 className="text-xl font-bold text-red-400 mb-2">Option 2: NO</h4>
+                <p className="text-zinc-400 text-sm">Stake on negative outcome</p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-purple-950/20 border border-purple-900/30 rounded-xl p-4">
+                <p className="text-zinc-400 text-sm mb-1">Creator Reward</p>
+                <p className="text-purple-300 font-bold">10% of total fees</p>
+              </div>
+              <div className="bg-blue-950/20 border border-blue-900/30 rounded-xl p-4">
+                <p className="text-zinc-400 text-sm mb-1">Resolver Reward</p>
+                <p className="text-blue-300 font-bold">40% of total fees</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Dynamic Reward System */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <PieChart className="text-red-500" size={32} />
+            Dynamic Reward System
+          </h2>
+          
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-8">
+            <div className="bg-gradient-to-r from-blue-950/30 to-purple-950/30 border border-blue-900/30 rounded-xl p-6 mb-8">
+              <h3 className="text-xl font-bold text-blue-300 mb-3 flex items-center gap-2">
+                <TrendingUp size={24} />
+                Starting Point
+              </h3>
+              <p className="text-zinc-300 leading-relaxed">
+                At the start, all options have <span className="text-blue-400 font-bold">equal probability</span> of winning. As users stake on different options, these percentages dynamically shift based on the total amount staked on each side. The more funds staked on an option, the higher its displayed percentage becomes.
+              </p>
+            </div>
+
+            <p className="text-lg text-zinc-300 mb-6 leading-relaxed">
+              Participants cannot predict exact winnings because payouts depend on:
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800">
+                <DollarSign className="text-yellow-500 mb-3" size={28} />
+                <h4 className="font-bold text-white mb-2">Total Pool Size</h4>
+                <p className="text-zinc-400 text-sm">All staked funds combined</p>
+              </div>
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800">
+                <Award className="text-orange-500 mb-3" size={28} />
+                <h4 className="font-bold text-white mb-2">Distribution</h4>
+                <p className="text-zinc-400 text-sm">How much was staked on each side</p>
+              </div>
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800">
+                <TrendingUp className="text-emerald-500 mb-3" size={28} />
+                <h4 className="font-bold text-white mb-2">Your Stake</h4>
+                <p className="text-zinc-400 text-sm">Proportion within winning option</p>
+              </div>
+            </div>
+
+            {/* Interactive Example */}
+            <div className="bg-gradient-to-br from-red-950/20 to-zinc-950 border border-red-900/30 rounded-xl p-8">
+              <h3 className="text-xl font-bold mb-6 text-red-400">Example Scenario</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-center justify-between bg-zinc-950/50 rounded-lg p-4">
+                  <span className="text-zinc-400">Total Pool</span>
+                  <span className="text-white font-bold text-2xl">$10,000</span>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setActiveExample('yes')}
+                    className={`p-6 rounded-xl border-2 transition-all ${
+                      activeExample === 'yes'
+                        ? 'bg-emerald-950/40 border-emerald-700'
+                        : 'bg-zinc-900/50 border-zinc-800 hover:border-zinc-700'
+                    }`}
+                  >
+                    <div className="text-emerald-400 font-bold text-xl mb-2">YES Stakers</div>
+                    <div className="text-white text-3xl font-bold">$3,000</div>
+                  </button>
+                  <button
+                    onClick={() => setActiveExample('no')}
+                    className={`p-6 rounded-xl border-2 transition-all ${
+                      activeExample === 'no'
+                        ? 'bg-red-950/40 border-red-700'
+                        : 'bg-zinc-900/50 border-zinc-800 hover:border-zinc-700'
+                    }`}
+                  >
+                    <div className="text-red-400 font-bold text-xl mb-2">NO Stakers</div>
+                    <div className="text-white text-3xl font-bold">$7,000</div>
+                  </button>
+                </div>
+
+                {activeExample === 'yes' && (
+                  <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-xl p-6 animate-fade-in">
+                    <h4 className="text-emerald-300 font-bold text-lg mb-3">If "YES" Wins:</h4>
+                    <p className="text-zinc-300 mb-4">
+                      The $3,000 "YES" stakers share the entire pool minus fees
+                    </p>
+                    <div className="flex items-center justify-between bg-zinc-950/50 rounded-lg p-4">
+                      <span className="text-zinc-400">Winner Pool Share</span>
+                      <span className="text-emerald-400 font-bold text-2xl">$9,900</span>
+                    </div>
+                    <p className="text-xs text-zinc-500 mt-2">($10,000 - 1% platform fee)</p>
+                  </div>
+                )}
+
+                {activeExample === 'no' && (
+                  <div className="bg-red-950/30 border border-red-900/50 rounded-xl p-6 animate-fade-in">
+                    <h4 className="text-red-300 font-bold text-lg mb-3">If "NO" Wins:</h4>
+                    <p className="text-zinc-300 mb-4">
+                      The $7,000 "NO" stakers share the entire pool minus fees
+                    </p>
+                    <div className="flex items-center justify-between bg-zinc-950/50 rounded-lg p-4">
+                      <span className="text-zinc-400">Winner Pool Share</span>
+                      <span className="text-red-400 font-bold text-2xl">$9,900</span>
+                    </div>
+                    <p className="text-xs text-zinc-500 mt-2">($10,000 - 1% platform fee)</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Fee Structure */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <DollarSign className="text-red-500" size={32} />
+            Fee Structure (1% of Total Pool)
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-red-950/40 to-zinc-900 border border-red-900/30 rounded-2xl p-8 text-center">
+              <div className="text-6xl font-bold text-red-400 mb-3">50%</div>
+              <h3 className="text-xl font-bold text-white mb-2">to Admin</h3>
+              <p className="text-zinc-400 text-sm">Platform maintenance and development</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-emerald-950/40 to-zinc-900 border border-emerald-900/30 rounded-2xl p-8 text-center">
+              <div className="text-6xl font-bold text-emerald-400 mb-3">40%</div>
+              <h3 className="text-xl font-bold text-white mb-2">to Resolvers</h3>
+              <p className="text-zinc-400 text-sm">Outcome verification incentives</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-purple-950/40 to-zinc-900 border border-purple-900/30 rounded-2xl p-8 text-center">
+              <div className="text-6xl font-bold text-purple-400 mb-3">10%</div>
+              <h3 className="text-xl font-bold text-white mb-2">to Creators</h3>
+              <p className="text-zinc-400 text-sm">Pool creation rewards</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Blind Prediction Environment */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Shield className="text-red-500" size={32} />
+            Blind Prediction Environment
+          </h2>
+          
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-8">
+            <p className="text-lg text-zinc-300 mb-8 leading-relaxed">
+              Users stake without knowing key information, creating pure forecasting markets where success depends entirely on predictive accuracy:
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800 text-center">
+                <EyeOff className="text-red-500 mx-auto mb-4" size={40} />
+                <h4 className="font-bold text-white mb-2">Hidden Distributions</h4>
+                <p className="text-zinc-400 text-sm">Current voting distributions are concealed</p>
+              </div>
+              
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800 text-center">
+                <EyeOff className="text-red-500 mx-auto mb-4" size={40} />
+                <h4 className="font-bold text-white mb-2">Unknown Payouts</h4>
+                <p className="text-zinc-400 text-sm">Potential payout ratios remain unknown</p>
+              </div>
+              
+              <div className="bg-zinc-950/50 rounded-xl p-6 border border-zinc-800 text-center">
+                <EyeOff className="text-red-500 mx-auto mb-4" size={40} />
+                <h4 className="font-bold text-white mb-2">Anonymous Positions</h4>
+                <p className="text-zinc-400 text-sm">Other participants' positions are hidden</p>
+              </div>
+            </div>
+
+            <div className="mt-8 bg-gradient-to-r from-red-950/30 to-orange-950/30 border border-red-900/30 rounded-xl p-6">
+              <p className="text-center text-zinc-300">
+                <span className="text-red-400 font-bold">No gaming the system.</span> No following crowds. Just pure predictive skill and market insight.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [activeTab, setActiveTab] = useState('explore');
   const [selectedPool, setSelectedPool] = useState(null);
@@ -2529,12 +2840,12 @@ const App = () => {
       {!selectedPool && (
         <nav className="border-b border-zinc-900 bg-zinc-950/30">
           <div className="container mx-auto px-6">
-            <div className="flex gap-1">
-              {['explore', 'admin', 'create event', 'become a resolver', 'resolver', 'user withdraw', 'leaderboard', 'pitch deck'].map((tab) => (
+            <div className="flex gap-1 text-sm">
+              {['explore', 'admin', 'create event', 'become a resolver', 'resolver', 'user withdraw', 'leaderboard', 'Docs', 'how it works'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-6 py-4 font-semibold capitalize transition-all relative ${
+                  className={`px-4 py-4 font-semibold capitalize transition-all relative ${
                     activeTab === tab
                       ? 'text-white'
                       : 'text-zinc-500 hover:text-zinc-300'
@@ -2564,7 +2875,8 @@ const App = () => {
             {activeTab === 'become a resolver' && <BecomeResolverTab />}
             {activeTab === 'leaderboard' && <ResolversTab />}
             {activeTab === 'user withdraw' && <UserWithdrawTab />}
-            {activeTab === 'pitch deck' && <PitchDeckSection />}
+            {activeTab === 'Docs' && <PitchDeckSection />}
+            {activeTab === 'how it works' && <HowItWorksPage />}
           </>
         )}
       </main>
